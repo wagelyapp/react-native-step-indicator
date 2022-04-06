@@ -52,30 +52,31 @@ interface DefaultStepIndicatorStyles {
 }
 
 const defaultStyles: DefaultStepIndicatorStyles = {
-  stepIndicatorSize: 30,
-  currentStepIndicatorSize: 40,
-  separatorStrokeWidth: 3,
+  stepIndicatorSize: 32,
+  currentStepIndicatorSize: 32,
+  separatorStrokeWidth: 12,
+  currentStepStrokeWidth: 5,
+  stepStrokeCurrentColor: '#F3F4F6',
+  stepStrokeWidth: 5,
+  stepStrokeFinishedColor: '#F3F4F6',
+  stepStrokeUnFinishedColor: '#F3F4F6',
+  separatorFinishedColor: '#EEBE42',
+  separatorUnFinishedColor: '#F3F4F6',
+  stepIndicatorFinishedColor: '#EEBE42',
+  stepIndicatorUnFinishedColor: '#EEBE42',
+  stepIndicatorCurrentColor: '#EEBE42',
+  stepIndicatorLabelUnFinishedColor: '#F3F4F6',
+  labelColor: '#B3B7BA',
+  labelSize: 10,
+  currentStepLabelColor: '#B3B7BA',
+  labelFontFamily: 'Poppins-Regular',
   separatorStrokeUnfinishedWidth: 0,
   separatorStrokeFinishedWidth: 0,
-  currentStepStrokeWidth: 5,
-  stepStrokeWidth: 0,
-  stepStrokeCurrentColor: '#4aae4f',
-  stepStrokeFinishedColor: '#4aae4f',
-  stepStrokeUnFinishedColor: '#4aae4f',
-  separatorFinishedColor: '#4aae4f',
-  separatorUnFinishedColor: '#a4d4a5',
-  stepIndicatorFinishedColor: '#4aae4f',
-  stepIndicatorUnFinishedColor: '#a4d4a5',
-  stepIndicatorCurrentColor: '#ffffff',
   stepIndicatorLabelFontSize: 15,
   currentStepIndicatorLabelFontSize: 15,
-  stepIndicatorLabelCurrentColor: '#000000',
-  stepIndicatorLabelFinishedColor: '#ffffff',
-  stepIndicatorLabelUnFinishedColor: 'rgba(255,255,255,0.5)',
-  labelColor: '#000000',
-  labelSize: 13,
+  stepIndicatorLabelCurrentColor: '#F3F4F6',
+  stepIndicatorLabelFinishedColor: '#F3F4F6',
   labelAlign: 'center',
-  currentStepLabelColor: '#4aae4f',
 };
 
 const StepIndicator = ({
@@ -127,7 +128,9 @@ const StepIndicator = ({
 
   const renderProgressBarBackground = () => {
     let progressBarBackgroundStyle: ViewStyle = {
-      backgroundColor: customStylesFromProps ? customStylesFromProps.separatorUnFinishedColor : customStyles.separatorUnFinishedColor,
+      backgroundColor: customStylesFromProps
+        ? customStylesFromProps.separatorUnFinishedColor
+        : customStyles.separatorUnFinishedColor,
       position: 'absolute',
     };
     if (direction === 'vertical') {
@@ -169,7 +172,9 @@ const StepIndicator = ({
 
   const renderProgressBar = () => {
     let progressBarStyle: any = {
-      backgroundColor: customStylesFromProps ? customStylesFromProps.separatorFinishedColor : customStyles.separatorFinishedColor,
+      backgroundColor: customStylesFromProps
+        ? customStylesFromProps.separatorFinishedColor
+        : customStyles.separatorFinishedColor,
       position: 'absolute',
     };
     if (direction === 'vertical') {
@@ -252,8 +257,16 @@ const StepIndicator = ({
     var labelViews = labels.map((label, index) => {
       const selectedStepLabelStyle =
         index === currentPosition
-          ? { color: customStylesFromProps ? customStylesFromProps.currentStepLabelColor : customStyles.currentStepLabelColor }
-          : { color: customStylesFromProps ? customStylesFromProps.labelColor : customStyles.labelColor };
+          ? {
+              color: customStylesFromProps
+                ? customStylesFromProps.currentStepLabelColor
+                : customStyles.currentStepLabelColor,
+            }
+          : {
+              color: customStylesFromProps
+                ? customStylesFromProps.labelColor
+                : customStyles.labelColor,
+            };
       return (
         <TouchableWithoutFeedback
           style={styles.stepLabelItem}
@@ -308,9 +321,15 @@ const StepIndicator = ({
     switch (getStepStatus(position)) {
       case STEP_STATUS.CURRENT: {
         stepStyle = {
-          backgroundColor: customStylesFromProps ? customStylesFromProps.stepIndicatorCurrentColor : customStyles.stepIndicatorCurrentColor,
-          borderWidth: customStylesFromProps ? customStylesFromProps.currentStepStrokeWidth : customStyles.currentStepStrokeWidth,
-          borderColor: customStylesFromProps ? customStylesFromProps.stepStrokeCurrentColor : customStyles.stepStrokeCurrentColor,
+          backgroundColor: customStylesFromProps
+            ? customStylesFromProps.stepIndicatorCurrentColor
+            : customStyles.stepIndicatorCurrentColor,
+          borderWidth: customStylesFromProps
+            ? customStylesFromProps.currentStepStrokeWidth
+            : customStyles.currentStepStrokeWidth,
+          borderColor: customStylesFromProps
+            ? customStylesFromProps.stepStrokeCurrentColor
+            : customStyles.stepStrokeCurrentColor,
           height: sizeAnim,
           width: sizeAnim,
           borderRadius: borderRadiusAnim,
@@ -318,44 +337,72 @@ const StepIndicator = ({
         };
         indicatorLabelStyle = {
           overflow: 'hidden',
-          fontSize: customStylesFromProps ? customStylesFromProps.currentStepIndicatorLabelFontSize : customStyles.currentStepIndicatorLabelFontSize,
-          color: customStylesFromProps ? customStylesFromProps.stepIndicatorLabelCurrentColor : customStyles.stepIndicatorLabelCurrentColor,
+          fontSize: customStylesFromProps
+            ? customStylesFromProps.currentStepIndicatorLabelFontSize
+            : customStyles.currentStepIndicatorLabelFontSize,
+          color: customStylesFromProps
+            ? customStylesFromProps.stepIndicatorLabelCurrentColor
+            : customStyles.stepIndicatorLabelCurrentColor,
         };
 
         break;
       }
       case STEP_STATUS.FINISHED: {
         stepStyle = {
-          backgroundColor: customStylesFromProps ? customStylesFromProps.stepIndicatorFinishedColor : customStyles.stepIndicatorFinishedColor,
-          borderWidth: customStylesFromProps ? customStylesFromProps.stepStrokeWidth : customStyles.stepStrokeWidth,
-          borderColor: customStylesFromProps ? customStylesFromProps.stepStrokeFinishedColor : customStyles.stepStrokeFinishedColor,
+          backgroundColor: customStylesFromProps
+            ? customStylesFromProps.stepIndicatorFinishedColor
+            : customStyles.stepIndicatorFinishedColor,
+          borderWidth: customStylesFromProps
+            ? customStylesFromProps.stepStrokeWidth
+            : customStyles.stepStrokeWidth,
+          borderColor: customStylesFromProps
+            ? customStylesFromProps.stepStrokeFinishedColor
+            : customStyles.stepStrokeFinishedColor,
           height: staleSizeAnim,
           width: staleSizeAnim,
-          borderRadius: customStylesFromProps ? customStylesFromProps.stepIndicatorSize as number / 2 :customStyles.stepIndicatorSize / 2,
+          borderRadius: customStylesFromProps
+            ? (customStylesFromProps.stepIndicatorSize as number) / 2
+            : customStyles.stepIndicatorSize / 2,
           overflow: 'hidden',
         };
         indicatorLabelStyle = {
           overflow: 'hidden',
-          fontSize: customStylesFromProps ? customStylesFromProps.stepIndicatorLabelFontSize : customStyles.stepIndicatorLabelFontSize,
-          color: customStylesFromProps ? customStylesFromProps.stepIndicatorLabelFinishedColor : customStyles.stepIndicatorLabelFinishedColor,
+          fontSize: customStylesFromProps
+            ? customStylesFromProps.stepIndicatorLabelFontSize
+            : customStyles.stepIndicatorLabelFontSize,
+          color: customStylesFromProps
+            ? customStylesFromProps.stepIndicatorLabelFinishedColor
+            : customStyles.stepIndicatorLabelFinishedColor,
         };
         break;
       }
 
       case STEP_STATUS.UNFINISHED: {
         stepStyle = {
-          backgroundColor: customStylesFromProps ? customStylesFromProps.stepIndicatorUnFinishedColor : customStyles.stepIndicatorUnFinishedColor,
-          borderWidth: customStylesFromProps ? customStylesFromProps.stepStrokeWidth : customStyles.stepStrokeWidth,
-          borderColor: customStylesFromProps ? customStylesFromProps.stepStrokeUnFinishedColor : customStyles.stepStrokeUnFinishedColor,
+          backgroundColor: customStylesFromProps
+            ? customStylesFromProps.stepIndicatorUnFinishedColor
+            : customStyles.stepIndicatorUnFinishedColor,
+          borderWidth: customStylesFromProps
+            ? customStylesFromProps.stepStrokeWidth
+            : customStyles.stepStrokeWidth,
+          borderColor: customStylesFromProps
+            ? customStylesFromProps.stepStrokeUnFinishedColor
+            : customStyles.stepStrokeUnFinishedColor,
           height: staleSizeAnim,
           width: staleSizeAnim,
-          borderRadius: customStylesFromProps ? customStylesFromProps.stepIndicatorSize as number / 2 : customStyles.stepIndicatorSize / 2,
+          borderRadius: customStylesFromProps
+            ? (customStylesFromProps.stepIndicatorSize as number) / 2
+            : customStyles.stepIndicatorSize / 2,
           overflow: 'hidden',
         };
         indicatorLabelStyle = {
           overflow: 'hidden',
-          fontSize: customStylesFromProps ? customStylesFromProps.stepIndicatorLabelFontSize : customStyles.stepIndicatorLabelFontSize,
-          color: customStylesFromProps ? customStylesFromProps.stepIndicatorLabelUnFinishedColor : customStyles.stepIndicatorLabelUnFinishedColor,
+          fontSize: customStylesFromProps
+            ? customStylesFromProps.stepIndicatorLabelFontSize
+            : customStyles.stepIndicatorLabelFontSize,
+          color: customStylesFromProps
+            ? customStylesFromProps.stepIndicatorLabelUnFinishedColor
+            : customStyles.stepIndicatorLabelUnFinishedColor,
         };
         break;
       }
